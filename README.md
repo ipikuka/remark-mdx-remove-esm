@@ -55,8 +55,6 @@ import remarkMdxRemoveEsm from "remark-mdx-remove-esm";
 main();
 
 async function main() {
-  const toc = [];
-
   const file = await remark()
     .use(remarkMdx)
     .use(gfm)
@@ -69,7 +67,7 @@ async function main() {
 }
 ```
 
-Now, running `node example.js` you see that the imports and exports are removed:
+Now, running `node example.js` you see that the imports and exports have been removed:
 
 ```html
 <p>Hi</p>
@@ -79,10 +77,10 @@ Without `remark-mdx-remove-esm`, running of the compiled source would cause the 
 
 ## Options
 
-There is one option. It is optional and can be either `"import"` or `"export"` or array of `("import" | "export")[]`.
+There is one option. It can be either `"import"` or `"export"` or array of `("import" | "export")`.
 
 ```typescript
-type MdxEsmSpecifier = "imports" | "exports";
+type MdxEsmSpecifier = "import" | "export";
 
 type MdxRemoveEsmOptions = MdxEsmSpecifier | MdxEsmSpecifier[];
 
@@ -93,26 +91,26 @@ use(remarkMdxRemoveEsm);
 use(remarkMdxRemoveEsm, undefined);
 
 // removes ONLY import statements
-use(remarkMdxRemoveEsm, "imports"); 
+use(remarkMdxRemoveEsm, "import"); 
 
 // removes ONLY export statements
-use(remarkMdxRemoveEsm, "exports"); 
+use(remarkMdxRemoveEsm, "export"); 
 
 // removes ONLY import statements
-use(remarkMdxRemoveEsm, ["imports"]); 
+use(remarkMdxRemoveEsm, ["import"]); 
 
 // removes ONLY export statements
-use(remarkMdxRemoveEsm, ["exports"]); 
+use(remarkMdxRemoveEsm, ["export"]); 
 
 // removes both export and import statements
-use(remarkMdxRemoveEsm, ["exports", "imports"]); 
+use(remarkMdxRemoveEsm, ["export", "import"]); 
 ```
 
 ## `clsx` utiliy
 
-The `remark-mdx-remove-esm` exports a small utility function called `clsx` to help developers not to download `clsx` package.
+The `remark-mdx-remove-esm` exports a small utility function called **`clsx`** to help developers don't need to download the `clsx` package.
 
-The `clsx` has one functionality so as to compose an array of MdxEsmSpecifier for the `remark-mdx-remove-esm`.
+The `clsx` has one functionality which is composing **an array of `MdxEsmSpecifier`** for the `remark-mdx-remove-esm`.
 
 It returns 
 
