@@ -104,6 +104,9 @@ use(remarkMdxRemoveEsm, ["export"]);
 
 // removes both export and import statements
 use(remarkMdxRemoveEsm, ["export", "import"]); 
+
+// DON'T remove any statement
+use(remarkMdxRemoveEsm, []); 
 ```
 
 ## `clsx` utiliy
