@@ -1,19 +1,22 @@
 # remark-mdx-remove-esm
 
-[![NPM version][npm-image]][npm-url]
-[![Build][github-build]][github-build-url]
-![npm-typescript]
-[![License][github-license]][github-license-url]
+[![NPM version][badge-npm-version]][npm-package-url]
+[![NPM downloads][badge-npm-download]][npm-package-url]
+[![Build][badge-build]][github-workflow-url]
+[![codecov](https://codecov.io/gh/ipikuka/remark-mdx-remove-esm/graph/badge.svg?token=U6CFVM0DRE)](https://codecov.io/gh/ipikuka/remark-mdx-remove-esm)
+[![type-coverage](https://img.shields.io/badge/dynamic/json.svg?label=type-coverage&prefix=%E2%89%A5&suffix=%&query=$.typeCoverage.atLeast&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fipikuka%2Fremark-mdx-remove-esm%2Fmaster%2Fpackage.json)](https://github.com/ipikuka/remark-mdx-remove-esm)
+[![typescript][badge-typescript]][typescript-url]
+[![License][badge-license]][github-license-url]
 
-This package is a [unified][unified] ([remark][remark]) plugin to remove import and/or export statements (mdxjsEsm) from AST (compatible with new parser "[micromark][micromark]").
+This package is a [unified][unified] ([remark][remark]) plugin to remove import and/or export statements (`mdxjsEsm`) in MDX documents.
 
-"**unified**" is a project that transforms content with abstract syntax trees (ASTs). "**remark**" adds support for markdown to unified. "**mdast**" is the markdown abstract syntax tree (AST) that remark uses.
+**[unified][unified]** is a project that transforms content with abstract syntax trees (ASTs) using the new parser **[micromark][micromark]**. **[remark][remark]** adds support for markdown to unified. **[mdast][mdast]** is the Markdown Abstract Syntax Tree (AST) which is a specification for representing markdown in a syntax tree.
 
-**This plugin is a remark plugin that removes "mdxjsEsm" type AST nodes in the MDX which is parsed via `remark-mdx`.**
+**This plugin is a remark plugin that removes "mdxjsEsm" type AST nodes in MDX which is parsed via `remark-mdx`.**
 
 ## When should I use this?
 
-This plugin `remark-mdx-remove-esm` is useful if you want to remove `import` and / or `export` statements from the markdown/MDX document.
+This plugin `remark-mdx-remove-esm` is useful if you want to remove `import` and / or `export` statements from a MDX document.
 
 ## Installation
 
@@ -77,7 +80,9 @@ Without `remark-mdx-remove-esm`, running of the compiled source would cause the 
 
 ## Options
 
-There is one option. It can be either `"import"` or `"export"` or array of `("import" | "export")`.
+The option can be either `"import"` or `"export"` or array of `("import" | "export")`. 
+
+By default it is `undefined`.
 
 ```typescript
 type MdxEsmSpecifier = "import" | "export";
@@ -105,7 +110,7 @@ use(remarkMdxRemoveEsm, ["export"]);
 // removes both export and import statements
 use(remarkMdxRemoveEsm, ["export", "import"]); 
 
-// DON'T remove any statement
+// DOESN'T remove any statement
 use(remarkMdxRemoveEsm, []); 
 ```
 
@@ -134,7 +139,7 @@ This plugin modifies the `mdast` (markdown abstract syntax tree).
 
 ## Types
 
-This package is fully typed with [TypeScript][typeScript].
+This package is fully typed with [TypeScript][typescript].
 
 The plugin exports the types `MdxRemoveEsmOptions`, `MdxEsmSpecifier`.
 
@@ -148,56 +153,71 @@ Use of `remark-mdx-remove-esm` does not involve rehype (hast) or user content so
 
 ## My Plugins
 
+I like to contribute the Unified / Remark / MDX ecosystem, so I recommend you to have a look my plugins.
+
 ### My Remark Plugins
 
-+ [`remark-flexible-code-titles`](https://www.npmjs.com/package/remark-flexible-code-titles)
+- [`remark-flexible-code-titles`](https://www.npmjs.com/package/remark-flexible-code-titles)
   – Remark plugin to add titles or/and containers for the code blocks with customizable properties
-+ [`remark-flexible-containers`](https://www.npmjs.com/package/remark-flexible-containers)
+- [`remark-flexible-containers`](https://www.npmjs.com/package/remark-flexible-containers)
   – Remark plugin to add custom containers with customizable properties in markdown
-+ [`remark-ins`](https://www.npmjs.com/package/remark-ins)
+- [`remark-ins`](https://www.npmjs.com/package/remark-ins)
   – Remark plugin to add `ins` element in markdown
-+ [`remark-flexible-paragraphs`](https://www.npmjs.com/package/remark-flexible-paragraphs)
+- [`remark-flexible-paragraphs`](https://www.npmjs.com/package/remark-flexible-paragraphs)
   – Remark plugin to add custom paragraphs with customizable properties in markdown
-+ [`remark-flexible-markers`](https://www.npmjs.com/package/remark-flexible-markers)
+- [`remark-flexible-markers`](https://www.npmjs.com/package/remark-flexible-markers)
   – Remark plugin to add custom `mark` element with customizable properties in markdown
-+ [`remark-flexible-toc`](https://www.npmjs.com/package/remark-flexible-toc)
-  – Remark plugin to expose the table of contents via Vfile.data or via an option reference
-+ [`remark-mdx-remove-esm`](https://www.npmjs.com/package/remark-mdx-remove-esm)
+- [`remark-flexible-toc`](https://www.npmjs.com/package/remark-flexible-toc)
+  – Remark plugin to expose the table of contents via `vfile.data` or via an option reference
+- [`remark-mdx-remove-esm`](https://www.npmjs.com/package/remark-mdx-remove-esm)
   – Remark plugin to remove import and/or export statements (mdxjsEsm)
+
+### My Rehype Plugins
+
+- [`rehype-pre-language`](https://www.npmjs.com/package/rehype-pre-language)
+  – Rehype plugin to add language information as a property to `pre` element
 
 ### My Recma Plugins
 
-+ [`recma-mdx-escape-missing-components`](https://www.npmjs.com/package/recma-mdx-escape-missing-components)
-  – Recma plugin to set the default value `() => null` for the Components in MDX in case of missing or not provided
-+ [`recma-mdx-change-props`](https://www.npmjs.com/package/recma-mdx-change-props)
-  – Recma plugin to change the 'props' parameter into '_props' in the function '_createMdxContent' in the compiled source in order to be able to use {props.foo} like expressions. It is useful for the `next-mdx-remote` or `next-mdx-remote-client` users in `nextjs` applications.
+- [`recma-mdx-escape-missing-components`](https://www.npmjs.com/package/recma-mdx-escape-missing-components)
+  – Recma plugin to set the default value `() => null` for the Components in MDX in case of missing or not provided so as not to throw an error
+- [`recma-mdx-change-props`](https://www.npmjs.com/package/recma-mdx-change-props)
+  – Recma plugin to change the `props` parameter into the `_props` in the `function _createMdxContent(props) {/* */}` in the compiled source in order to be able to use `{props.foo}` like expressions. It is useful for the `next-mdx-remote` or `next-mdx-remote-client` users in `nextjs` applications.
 
 ## License
 
-[MIT][license] © ipikuka
+[MIT License](./LICENSE) © ipikuka
 
 ### Keywords
 
-[unified][unifiednpm] [remark][remarknpm] [remark-plugin][remarkpluginnpm] [mdast][mdastnpm] [markdown][markdownnpm] [mdx][mdxnpm] [mdxjsEsm][mdxjsesmnpm] [remark mdx remove esm][remarkmdxremoveesmnpm]
+🟩 [unified][unifiednpm] 🟩 [remark][remarknpm] 🟩 [remark plugin][remarkpluginnpm] 🟩 [mdast][mdastnpm] 🟩 [markdown][markdownnpm] 🟩 [mdx][mdxnpm] 🟩 [mdxjsEsm][mdxjsesmnpm] 🟩 [remark mdx remove esm][remarkmdxremoveesmnpm]
 
-[unified]: https://github.com/unifiedjs/unified
 [unifiednpm]: https://www.npmjs.com/search?q=keywords:unified
-[remark]: https://github.com/remarkjs/remark
 [remarknpm]: https://www.npmjs.com/search?q=keywords:remark
 [remarkpluginnpm]: https://www.npmjs.com/search?q=keywords:remark%20plugin
-[mdast]: https://github.com/syntax-tree/mdast
 [mdastnpm]: https://www.npmjs.com/search?q=keywords:mdast
-[micromark]: https://github.com/micromark/micromark
-[typescript]: https://www.typescriptlang.org/
-[license]: https://github.com/ipikuka/remark-mdx-remove-esm/blob/main/LICENSE
+[markdownnpm]: https://www.npmjs.com/search?q=keywords:markdown
 [mdxnpm]: https://www.npmjs.com/search?q=keywords:mdx
 [mdxjsesmnpm]: https://www.npmjs.com/search?q=keywords:mdxjsEsm
-[markdownnpm]: https://www.npmjs.com/search?q=keywords:markdown
 [remarkmdxremoveesmnpm]: https://www.npmjs.com/search?q=keywords:remark%20mdx%20remove%20esm
-[npm-url]: https://www.npmjs.com/package/remark-mdx-remove-esm
-[npm-image]: https://img.shields.io/npm/v/remark-mdx-remove-esm
-[github-license]: https://img.shields.io/github/license/ipikuka/remark-mdx-remove-esm
-[github-license-url]: https://github.com/ipikuka/remark-mdx-remove-esm/blob/master/LICENSE
-[github-build]: https://github.com/ipikuka/remark-mdx-remove-esm/actions/workflows/publish.yml/badge.svg
-[github-build-url]: https://github.com/ipikuka/remark-mdx-remove-esm/actions/workflows/publish.yml
-[npm-typescript]: https://img.shields.io/npm/types/remark-mdx-remove-esm
+
+
+[unified]: https://github.com/unifiedjs/unified
+[remark]: https://github.com/remarkjs/remark
+[remarkplugins]: https://github.com/remarkjs/remark/blob/main/doc/plugins.md
+[mdast]: https://github.com/syntax-tree/mdast
+[micromark]: https://github.com/micromark/micromark
+[typescript]: https://www.typescriptlang.org/
+
+[badge-npm-version]: https://img.shields.io/npm/v/remark-mdx-remove-esm
+[badge-npm-download]:https://img.shields.io/npm/dt/remark-mdx-remove-esm
+[npm-package-url]: https://www.npmjs.com/package/remark-mdx-remove-esm
+
+[badge-license]: https://img.shields.io/github/license/ipikuka/remark-mdx-remove-esm
+[github-license-url]: https://github.com/ipikuka/remark-mdx-remove-esm/blob/main/LICENSE
+
+[badge-build]: https://github.com/ipikuka/remark-mdx-remove-esm/actions/workflows/publish.yml/badge.svg
+[github-workflow-url]: https://github.com/ipikuka/remark-mdx-remove-esm/actions/workflows/publish.yml
+
+[badge-typescript]: https://img.shields.io/npm/types/remark-mdx-remove-esm
+[typescript-url]: https://www.typescriptlang.org/
