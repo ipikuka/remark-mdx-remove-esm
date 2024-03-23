@@ -7,16 +7,16 @@
   "main": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "npm run prebuild && tsc",
-    "lint": "eslint .",
+    "build": "rimraf dist && tsc --build && type-coverage",
+    "format": "npm run prettier && npm run lint",
     "prettier": "prettier --write .",
-    "test": "vitest",
+    "lint": "eslint .",
+    "test": "vitest --watch=false",
+    "test:watch": "vitest",
     "test:file": "vitest without_options.spec.ts",
-    "test:ci": "vitest --watch=false",
-    "test:type": "type-coverage",
     "prepack": "npm run build",
-    "prepublishOnly": "npm run test:ci && type-coverage && npm run prettier && npm run lint"
+    "prepublishOnly": "npm run test && npm run format && npm run test-coverage",
+    "test-coverage": "vitest run --coverage"
   },
   "files": [
     "dist/",
