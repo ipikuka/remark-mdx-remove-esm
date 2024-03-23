@@ -1,31 +1,8 @@
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import gfm from "remark-gfm";
-import remarkRehype from "remark-rehype";
-import remarkMdx from "remark-mdx";
-import rehypeStringify from "rehype-stringify";
-import dedent from "dedent";
-import type { VFileCompatible, VFile } from "vfile";
-
 import { describe, it, expect } from "vitest";
+import dedent from "dedent";
 
-import plugin, { MdxRemoveEsmOptions, clsx } from "../src";
-
-const compilerCreator = (options?: MdxRemoveEsmOptions) =>
-  unified()
-    .use(remarkParse)
-    .use(remarkMdx)
-    .use(gfm)
-    .use(plugin, options)
-    .use(remarkRehype)
-    .use(rehypeStringify);
-
-const process = async (
-  content: VFileCompatible,
-  options?: MdxRemoveEsmOptions,
-): Promise<VFile> => {
-  return compilerCreator(options).process(content);
-};
+import { clsx } from "../src";
+import { process } from "./util/index";
 
 const source = dedent`
   import x from "y";
@@ -35,7 +12,7 @@ const source = dedent`
   export const b = 1;
 `;
 
-describe("xxx", () => {
+describe("remark-mdx-remove-esm", () => {
   // ******************************************
   it("with no options", async () => {
     expect(String(await process(source))).toMatchInlineSnapshot(`"<p>Hi</p>"`);
@@ -107,53 +84,5 @@ describe("xxx", () => {
       <p>Hi</p>
       export const b = 1;"
     `);
-  });
-});
-
-const testCases = [
-  {
-    disableExports: true,
-    expected: ["export"],
-  },
-  {
-    disableExports: false,
-    expected: [],
-  },
-  {
-    disableExports: undefined,
-    expected: [],
-  },
-  {
-    disableExports: "someValue",
-    expected: ["export"],
-  },
-  {
-    disableExports: 0,
-    expected: [],
-  },
-  {
-    disableExports: null,
-    expected: [],
-  },
-  {
-    disableExports: [],
-    expected: ["export"],
-  },
-  {
-    disableExports: {},
-    expected: ["export"],
-  },
-] as const;
-
-describe("clsx", () => {
-  // ******************************************
-  it("clsx performs well", async () => {
-    testCases.forEach((testCase) => {
-      const specifiers = clsx([testCase.disableExports && "export"]);
-
-      console.log(testCase.disableExports);
-
-      expect(specifiers).toEqual(testCase.expected);
-    });
   });
 });
