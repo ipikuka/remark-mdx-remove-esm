@@ -72,7 +72,7 @@
     "vitest": "^1.6.1"
   },
   "dependencies": {
-    "@types/mdast": "^4.0.3",
+    "@types/mdast": "^4.0.4",
     "mdast-util-mdxjs-esm": "^2.0.1",
     "unist-util-remove": "^4.0.0"
   },
