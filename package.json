@@ -76,6 +76,9 @@
     "mdast-util-mdxjs-esm": "^2.0.1",
     "unist-util-remove": "^4.0.0"
   },
+  "peerDependencies": {
+    "unified": "^11"
+  },
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
