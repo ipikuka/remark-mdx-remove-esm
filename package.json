@@ -31,15 +31,14 @@
   "keywords": [
     "unified",
     "mdast",
-    "remark",
     "markdown",
     "MDX",
+    "remark",
     "plugin",
-    "remark-plugin",
-    "ESM",
+    "remark plugin",
     "mdxjsEsm",
-    "mdx-remove-esm",
-    "mdx-remove-mdxjsEsm"
+    "mdx remove esm",
+    "mdx remove mdxjsEsm"
   ],
   "author": "ipikuka <talatkuyuk@gmail.com>",
   "license": "MIT",
