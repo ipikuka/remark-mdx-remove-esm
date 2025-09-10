@@ -16,7 +16,7 @@ This package is a [**unified**][unified] ([**remark**][remark]) plugin **to remo
 
 ## When should I use this?
 
-This plugin `remark-mdx-remove-esm` is useful if you want to remove `import` and / or `export` statements from a MDX document.
+**`remark-mdx-remove-esm`** is useful if you want to remove `import` and / or `export` statements from a MDX document.
 
 ## Installation
 
