@@ -1,6 +1,6 @@
 {
   "name": "remark-mdx-remove-esm",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Remark plugin to remove import and/or export statements (mdxjsEsm)",
   "type": "module",
   "exports": "./dist/esm/index.js",
