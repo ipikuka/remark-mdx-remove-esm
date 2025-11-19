@@ -24,11 +24,15 @@ export function clsx(
 const RemarkMdxRemoveEsm: Plugin<[MdxRemoveEsmOptions?], Root> = (options) => {
   if (typeof options === "undefined") return removeAllEsm();
 
+  // classic V8 coverage false negative
+  /* v8 ignore next -- @preserve */
   if (typeof options === "string") {
     if (options === "export") return removeExports();
-    else if (options === "import") return removeImports();
+    if (options === "import") return removeImports();
   }
 
+  // classic V8 coverage false negative
+  /* v8 ignore next -- @preserve */
   if (Array.isArray(options)) {
     if (options.includes("import") && options.includes("export")) {
       return removeAllEsm();
