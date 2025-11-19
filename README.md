@@ -84,7 +84,7 @@ Now, running `node example.js` you see that the imports and exports have been re
 <p>Hi</p>
 ```
 
-Without `remark-mdx-remove-esm`, running of the compiled source would cause the import and export statements work.
+Without **`remark-mdx-remove-esm`**, running of the compiled source would cause the import and export statements work.
 
 ## Options
 
@@ -124,11 +124,11 @@ use(remarkMdxRemoveEsm, []);
 
 ## `clsx` utiliy
 
-The `remark-mdx-remove-esm` exports a small utility function called **`clsx`** to help developers don't need to download the `clsx` package.
+**`remark-mdx-remove-esm`** exports a small utility function called **`clsx`** to help developers don't need to download the `clsx` package.
 
-The `clsx` has one functionality which is composing **an array of `MdxEsmSpecifier`** for the `remark-mdx-remove-esm`.
+The **`clsx`** has one functionality which is composing **an array of `MdxEsmSpecifier`** for **`remark-mdx-remove-esm`**.
 
-It returns 
+It returns
 
 ```javascript
 const disableExports: boolean | undefined = true;
