@@ -1,6 +1,7 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, expectTypeOf } from "vitest";
 
-import { clsx } from "../src";
+import { clsx } from "../src/index.js";
+import { process } from "./util/index.js";
 
 const testCases = [
   {
@@ -43,9 +44,12 @@ describe("clsx", () => {
     testCases.forEach((testCase) => {
       const specifiers = clsx([testCase.disableExports && "export"]);
 
-      // console.log(testCase.disableExports);
-
+      // Runtime Assertion (Value check)
       expect(specifiers).toEqual(testCase.expected);
+
+      // Static Type Assertion (Type check)
+      // Confirms 'specifiers' is valid to pass as the 2nd argument of 'process'
+      expectTypeOf(specifiers).toExtend<Parameters<typeof process>[1]>();
     });
   });
 });

@@ -6,7 +6,7 @@ import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import type { VFileCompatible, VFile } from "vfile";
 
-import plugin, { type MdxRemoveEsmOptions } from "../../src";
+import plugin, { type MdxRemoveEsmOptions } from "../../src/index.js";
 
 const compilerCreator = (options?: MdxRemoveEsmOptions) =>
   unified()

@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
 import dedent from "dedent";
 
-import { clsx } from "../src";
-import { process } from "./util/index";
+import { clsx } from "../src/index.js";
+import { process } from "./util/index.js";
 
 const source = dedent`
   import x from "y";
