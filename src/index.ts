@@ -5,7 +5,9 @@ import { remove } from "unist-util-remove";
 
 export type MdxEsmSpecifier = "import" | "export";
 
-export type MdxRemoveEsmOptions = MdxEsmSpecifier | MdxEsmSpecifier[];
+export type MdxRemoveEsmOptions =
+  | MdxEsmSpecifier
+  | (MdxEsmSpecifier | string | boolean | null | undefined | 0)[];
 
 function isLiteral(node: Node): node is Literal {
   return "value" in node;
@@ -15,33 +17,19 @@ function isMdxjsEsm(node: Literal): node is MdxjsEsm {
   return node.type === "mdxjsEsm";
 }
 
-export function clsx(
-  arr: (MdxEsmSpecifier | false | null | undefined | 0)[],
-): MdxEsmSpecifier[] {
-  return arr.filter((item): item is MdxEsmSpecifier => !!item);
-}
-
 const RemarkMdxRemoveEsm: Plugin<[MdxRemoveEsmOptions?], Root> = (options) => {
-  if (typeof options === "undefined") return removeAllEsm();
+  // normalize everything into a clean array
+  const raw = Array.isArray(options) ? options : [options];
 
-  // classic V8 coverage false negative
-  /* v8 ignore next -- @preserve */
-  if (typeof options === "string") {
-    if (options === "export") return removeExports();
-    if (options === "import") return removeImports();
-  }
+  // filter for valid specifiers
+  const active = raw.filter((o): o is MdxEsmSpecifier => o === "import" || o === "export");
 
-  // classic V8 coverage false negative
-  /* v8 ignore next -- @preserve */
-  if (Array.isArray(options)) {
-    if (options.includes("import") && options.includes("export")) {
-      return removeAllEsm();
-    } else if (options.includes("export")) {
-      return removeExports();
-    } else if (options.includes("import")) {
-      return removeImports();
-    }
-  }
+  const hasImport = active.includes("import");
+  const hasExport = active.includes("export");
+
+  if (options === undefined || (hasImport && hasExport)) return removeAllEsm();
+  if (hasExport) return removeExports();
+  if (hasImport) return removeImports();
 
   function removeAllEsm() {
     return (tree: Root): undefined => {

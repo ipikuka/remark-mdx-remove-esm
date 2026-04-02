@@ -101,7 +101,7 @@ By default it is `undefined`.
 ```typescript
 type MdxEsmSpecifier = "import" | "export";
 
-type MdxRemoveEsmOptions = MdxEsmSpecifier | MdxEsmSpecifier[];
+type MdxRemoveEsmOptions = MdxEsmSpecifier | (MdxEsmSpecifier | string | boolean | null | undefined | 0)[];
 
 // removes both export and import statements
 use(remarkMdxRemoveEsm);
@@ -125,26 +125,21 @@ use(remarkMdxRemoveEsm, ["export"]);
 use(remarkMdxRemoveEsm, ["export", "import"]); 
 
 // DOESN'T remove any statement
-use(remarkMdxRemoveEsm, []); 
+use(remarkMdxRemoveEsm, []);
 ```
 
-## `clsx` utiliy
-
-**`remark-mdx-remove-esm`** exports a small utility function called **`clsx`** to help developers don't need to download the `clsx` package.
-
-The **`clsx`** has one functionality which is composing **an array of `MdxEsmSpecifier`** for **`remark-mdx-remove-esm`**.
-
-It returns
+**`remark-mdx-remove-esm`** accepts conditionally filtered arrays, automatically ignoring any falsy values (like `false`, `null`, or `undefined`) resulting from feature flags. For example:
 
 ```javascript
-const disableExports: boolean | undefined = true;
-const disableImports: boolean | undefined = undefined;
+// dynamic configuration based on environment or flags
+const disableExports = process.env.STRIP_EXPORTS === 'true';
+const disableExports = false;
 
-const mdxRemoveEsmOptions = clsx([disableExports && "export", disableImports && "import"]);
+// handles "dirty" arrays, no need to filter out false/undefined manually!
+const mdxRemoveEsmOptions = [ disableExports && "export", disableImports && "import"];
 
-// mdxRemoveEsmOptions --> ["export"]
-
-use(remarkMdxRemoveEsm, mdxRemoveEsmOptions); 
+// result: ["export", false] -> this is treated as ["export"]
+use(remarkMdxRemoveEsm, mdxRemoveEsmOptions);
 ```
 
 ## Syntax tree

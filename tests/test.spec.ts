@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import dedent from "dedent";
 
-import { clsx } from "../src/index.js";
 import { process } from "./util/index.js";
 
 const source = dedent`
@@ -39,7 +38,7 @@ describe("remark-mdx-remove-esm", () => {
     const disableExports = true;
     const disableImports = true;
 
-    const mdxRemoveEsmOptions = clsx([disableExports && "export", disableImports && "import"]);
+    const mdxRemoveEsmOptions = [disableExports && "export", disableImports && "import"];
 
     expect(String(await process(source, mdxRemoveEsmOptions))).toMatchInlineSnapshot(`
       "<p>Hi</p>"
@@ -51,7 +50,7 @@ describe("remark-mdx-remove-esm", () => {
     const disableExports = true;
     const disableImports = false;
 
-    const mdxRemoveEsmOptions = clsx([disableExports && "export", disableImports && "import"]);
+    const mdxRemoveEsmOptions = [disableExports && "export", disableImports && "import"];
 
     expect(String(await process(source, mdxRemoveEsmOptions))).toMatchInlineSnapshot(`
       "import x from "y";
@@ -64,7 +63,7 @@ describe("remark-mdx-remove-esm", () => {
     const disableExports = false;
     const disableImports = true;
 
-    const mdxRemoveEsmOptions = clsx([disableExports && "export", disableImports && "import"]);
+    const mdxRemoveEsmOptions = [disableExports && "export", disableImports && "import"];
 
     expect(String(await process(source, mdxRemoveEsmOptions))).toMatchInlineSnapshot(`
       "<p>Hi</p>
@@ -77,7 +76,7 @@ describe("remark-mdx-remove-esm", () => {
     const disableExports = undefined;
     const disableImports = undefined;
 
-    const mdxRemoveEsmOptions = clsx([disableExports && "export", disableImports && "import"]);
+    const mdxRemoveEsmOptions = [disableExports && "export", disableImports && "import"];
 
     expect(String(await process(source, mdxRemoveEsmOptions))).toMatchInlineSnapshot(`
       "import x from "y";
