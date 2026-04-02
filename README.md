@@ -50,7 +50,7 @@ yarn add remark-mdx-remove-esm
 
 Say we have the following MDX file, `example.mdx`, which consists some import and export statements.
 
-```markdown
+```mdx
 import x from "y";
 
 Hi
@@ -161,7 +161,7 @@ This plugin works with unified version 6+ and remark version 7+. It is compatibl
 
 ## Security
 
-Use of `remark-mdx-remove-esm` does not involve rehype (hast) or user content so there are no openings for cross-site scripting (XSS) attacks.
+Use of **`remark-mdx-remove-esm`** does not involve rehype (hast) or user content so there are no openings for cross-site scripting (XSS) attacks.
 
 ## My Plugins
 
