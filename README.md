@@ -94,14 +94,17 @@ Without **`remark-mdx-remove-esm`**, running of the compiled source would cause 
 
 ## Options
 
-The option can be either `"import"` or `"export"` or array of `("import" | "export")`. 
+The option can be either `"import"` or `"export"` or `("import" | "export")[]`. 
 
 By default it is `undefined`.
 
 ```typescript
 type MdxEsmSpecifier = "import" | "export";
 
-type MdxRemoveEsmOptions = MdxEsmSpecifier | (MdxEsmSpecifier | string | boolean | null | undefined | 0)[];
+type MdxRemoveEsmOptions = 
+  | undefined
+  | MdxEsmSpecifier 
+  | (MdxEsmSpecifier | string | boolean | null | undefined | 0)[];
 
 // removes both export and import statements
 use(remarkMdxRemoveEsm);
@@ -133,9 +136,9 @@ use(remarkMdxRemoveEsm, []);
 ```javascript
 // dynamic configuration based on environment or flags
 const disableExports = process.env.STRIP_EXPORTS === 'true';
-const disableExports = false;
+const disableImports = false;
 
-// handles "dirty" arrays, no need to filter out false/undefined manually!
+// handles "dirty" arrays, no need to filter out false/undefined manually
 const mdxRemoveEsmOptions = [ disableExports && "export", disableImports && "import"];
 
 // result: ["export", false] -> this is treated as ["export"]
