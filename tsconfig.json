@@ -5,7 +5,7 @@
     "module": "Node16",
     "moduleResolution": "Node16",
     "strict": true,
-    "skipLibCheck": true, // skip namespace 'JSX' errors for @types/mdx
+    "skipLibCheck": true, // for namespace 'JSX' in "mdx/types"
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
